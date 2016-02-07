@@ -1,9 +1,9 @@
 'use strict';
 
-var ClickHandler = require(process.cwd() + '/app/controllers/clickHandler.server.js');
+var PoolsController = require(process.cwd() + '/app/controllers/pools_controller.js');
 
 module.exports = function (app, db) {
-  var clickHandler = new ClickHandler(db);
+  var poolsController = new PoolsController(db);
 
   app.route('/')
     .get(function (req, res) {
@@ -54,37 +54,14 @@ module.exports = function (app, db) {
       });
     });
 
+    /* Pools */
+
   app.route('/pools')
-    .get(function (req, res){
-      var poolsCollection = db.collection('pools');
-
-      poolsCollection.find({}, {}).toArray(function (err, result) {
-        if (err) {
-          console.log(err);
-        } 
-
-        res.render('pools/index', {pools:result})
-      });
-    });
+    .get(poolsController.index);
 
   app.route('/pools/new')
-    .get(function(req, res){
-      res.render('pools/new')
-    })
-    .post(function (req, res){
-      var name = req.body.name;
+    .get(poolsController.new)
+    .post(poolsController.create);
 
-      var pools = db.collection('pools');
-
-      var poolInsertObject = {'name' : name }
-
-      pools.insert(poolInsertObject, function (err) {
-         if (err) {
-            throw err;
-            res.end('Erro ao cadastrar')
-         }
-
-         res.end('Cadastrado com sucesso')
-      });
-    });
+  app.get('/pool/:slug_title', poolsController.show);
 };

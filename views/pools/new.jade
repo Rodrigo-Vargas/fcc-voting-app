@@ -2,7 +2,10 @@ extends ../app
 block content
   form(action="/pools/new", method="POST")
     div.form-group
-      input(type="text", placeholder="Name", class="form-control" name="name")
+      input(type="text", placeholder="Title", class="form-control" name="title")
+
+    div.form-group
+      input(type="text", placeholder="Slug Title", class="form-control" name="slug_title")
     
     div.form-group
       input(type="submit", name="Submit", class="btn btn-default")

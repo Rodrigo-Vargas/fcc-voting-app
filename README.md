@@ -4,9 +4,16 @@
 
 * Implement User Stories
 
+* Add question on a pool
+
 * Add message when no pools
 * When insert a new pool, redirect the user to pool list with a feedback message
-* Add
+* Create pool show page
+* Create session system for login
+* Create a my pools page
+* Create about page, showing the user stories and usefull information about the application
+* Change port
+* Change mongodb url
 
 
 ## User Stories

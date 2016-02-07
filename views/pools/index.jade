@@ -9,6 +9,7 @@ html
 
       ul
         each pool in pools
-          li #{ pool.name }
+          li 
+            a(href="/pool/#{ pool.slug_title }") #{ pool.title }
 
       a.btn.btn-default(href="/pools/new")"New Pool"
