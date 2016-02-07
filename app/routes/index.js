@@ -54,8 +54,37 @@ module.exports = function (app, db) {
       });
     });
 
-  app.route('pools')
+  app.route('/pools')
     .get(function (req, res){
-      res.render('pools')
+      var poolsCollection = db.collection('pools');
+
+      poolsCollection.find({}, {}).toArray(function (err, result) {
+        if (err) {
+          console.log(err);
+        } 
+
+        res.render('pools/index', {pools:result})
+      });
+    });
+
+  app.route('/pools/new')
+    .get(function(req, res){
+      res.render('pools/new')
     })
+    .post(function (req, res){
+      var name = req.body.name;
+
+      var pools = db.collection('pools');
+
+      var poolInsertObject = {'name' : name }
+
+      pools.insert(poolInsertObject, function (err) {
+         if (err) {
+            throw err;
+            res.end('Erro ao cadastrar')
+         }
+
+         res.end('Cadastrado com sucesso')
+      });
+    });
 };

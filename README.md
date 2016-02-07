@@ -3,11 +3,10 @@
 ## TODO
 
 * Implement User Stories
-* Create a signin form
-* Create a signup form
 
-* Create a poll form creation
-* Create a poll list
+* Add message when no pools
+* When insert a new pool, redirect the user to pool list with a feedback message
+* Add
 
 
 ## User Stories
