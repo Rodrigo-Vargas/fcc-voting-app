@@ -1,15 +1,11 @@
 'use strict';
 
-function pools_controller (db) {
-   var poolsCollection = db.collection('pools');
-
+function pools_controller (mongoose) {
+   var Pool = mongoose.model('Pool', { title: String,
+                                          slug_title: String });
    this.index = function (req, res) {
-      poolsCollection.find({}, {}).toArray(function (err, result) {
-        if (err) {
-          throw err;
-        } 
-
-        res.render('pools/index', { pools:result });
+      Pool.find({}, function(err, pools) {
+        res.render('pools/index', { pools:pools });
       });
     }
 
@@ -39,10 +35,10 @@ function pools_controller (db) {
 
       var queryObject = {"slug_title" : slug_title}
 
-      poolsCollection.findOne(queryObject, {}, function (err, pool){
-        if (err)
+      Pool.findOne({ 'slug_title': slug_title }, 'title slug_title', function (err, pool) {
+        if (err) 
           throw err;
-
+        
         res.render('pools/show', { pool : pool });
       });
     }

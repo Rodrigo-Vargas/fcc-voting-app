@@ -1,9 +1,13 @@
 'use strict';
 
 var PoolsController = require(process.cwd() + '/app/controllers/pools_controller.js');
+var UsersController = require(process.cwd() + '/app/controllers/users_controller.js');
+var OptionsController = require(process.cwd() + '/app/controllers/options_controller.js');
 
-module.exports = function (app, db) {
-  var poolsController = new PoolsController(db);
+module.exports = function (app, mongoose) {
+  var poolsController = new PoolsController(mongoose);
+  var users_controller = new UsersController(mongoose);
+  var options_controller = new OptionsController(mongoose);
 
   app.route('/')
     .get(function (req, res) {
@@ -11,48 +15,12 @@ module.exports = function (app, db) {
     });
 
   app.route('/signup')
-    .get(function (req, res) {      
-      res.render('signup')})
-    .post(function (req, res){
-      var name = req.body.name;
-      var password = req.body.password;
-
-      var users = db.collection('users');
-
-      var userInsertObject = {'name' : name, 'password' : password}
-
-      users.insert(userInsertObject, function (err) {
-         if (err) {
-            throw err;
-            res.end('Erro ao cadastrar')
-         }
-
-         res.end('Cadastrado com sucesso')
-      });      
-    });
+    .get(users_controller.signup)
+    .post(users_controller.create);
 
   app.route('/login')
-    .get(function (req, res){
-      res.render('login');
-    })
-    .post(function(req, res){
-      var name = req.body.name;
-      var password = req.body.password;
-
-      var users = db.collection('users');
-
-      users.findOne({"name" : name, "password" : password}, {}, function (err, doc){
-        if (err)
-          throw err;
-
-        if (doc == null)
-          res.end('Login incorreto')
-        else
-          res.redirect('/pools')
-
-        res.end(JSON.stringify(doc));
-      });
-    });
+    .get(users_controller.login)
+    .post(users_controller.login_attempt);
 
     /* Pools */
 
@@ -64,4 +32,6 @@ module.exports = function (app, db) {
     .post(poolsController.create);
 
   app.get('/pool/:slug_title', poolsController.show);
+
+  app.get('/options/new', options_controller.new)
 };

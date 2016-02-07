@@ -1,0 +1,12 @@
+extends ../app
+block content
+  form(action="/options/new", method="POST")
+    div.form-group
+      input(type="text", placeholder="Title", class="form-control" name="title")
+
+    div.form-group
+      select
+        each
+    
+    div.form-group
+      input(type="submit", name="Submit", class="btn btn-default")
