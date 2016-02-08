@@ -1,6 +1,6 @@
 extends ../app
 block content
-  form(action="/options/new", method="POST")
+  form(action="/pool/#{poolId}/options/new", method="POST")
     div.form-group
       input(type="text", placeholder="Title", class="form-control" name="title")
 

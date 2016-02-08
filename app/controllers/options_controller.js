@@ -2,29 +2,30 @@
 
 function options_controller (mongoose) {
   var Pool = mongoose.model('Pool');
+  var Option = mongoose.model('Option');
 
   this.new = function(req, res){
     Pool.find({}, function(err, pools){
-      res.render('options/new', { pools : pools });
+      res.render('options/new', { pools : pools, 
+                                  poolId : req.params.pool_id });
     });
   }
 
   this.create = function (req, res){
+    //var poolId = req.params.pool_id;
     var title = req.body.title;
-    var slugTitle = req.body.slug_title;
-    var pool = req.body.pool;
+    var poolId = req.body.pool;
 
-    var poolInsertObject = { 'title'      : title,
-                             'slug_title' : slugTitle,
-                             'pool'       : pool }
+    Pool.findOne({_id : poolId}, function(err, pools){
+      var option = new Option({ title: title,
+                                _pool : poolId});
 
-    poolsCollection.insert(poolInsertObject, function (err) {
-       if (err) {
-          throw err;
-          res.end('Erro ao cadastrar')
-       }
+      option.save(function (err, option) {
+        if (err) 
+          return console.error(err);
 
-       res.end('Cadastrado com sucesso')
+        res.end('Cadastrado com sucesso')
+      });
     });
   }
 }

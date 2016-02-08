@@ -33,6 +33,6 @@ module.exports = function (app, mongoose) {
 
   app.get('/pool/:slug_title', poolsController.show);
 
-  app.get('/options/new', options_controller.new)
-  app.post('/options/new', options_controller.create)
+  app.get('/pool/:pool_id/options/new', options_controller.new)
+  app.post('/pool/:pool_id/options/new', options_controller.create)
 };
