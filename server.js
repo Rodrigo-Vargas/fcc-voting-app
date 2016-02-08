@@ -17,12 +17,16 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
    console.log('Successfully connected to MongoDB on port 27017.');
    app.use('/public', express.static(process.cwd() + '/public'));
+   app.use('/models', express.static(process.cwd() + '/app/models'));
    app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
    app.set('view engine', 'jade');
    app.use( bodyParser.json() );       // to support JSON-encoded bodies
    app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
      extended: true
    }));
+
+   var Pool = require('./app/models/pool');
+   var newPool = new Pool;
 
    routes(app, mongoose);
 

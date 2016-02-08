@@ -5,8 +5,9 @@ block content
       input(type="text", placeholder="Title", class="form-control" name="title")
 
     div.form-group
-      select
-        each
+      select(name="pool")
+        each pool in pools
+          option(value="#{ pool._id }") #{ pool.title }
     
     div.form-group
       input(type="submit", name="Submit", class="btn btn-default")
