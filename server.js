@@ -1,6 +1,9 @@
 'use strict';
 
 var express = require('express');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+var flash = require('connect-flash');
 var mongo = require('mongodb');
 var routes = require('./app/routes/index.js');
 var bodyParser = require('body-parser')
@@ -24,6 +27,9 @@ db.once('open', function() {
   app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
   }));
+  app.use(cookieParser('secret'));
+  app.use(session({cookie: { maxAge: 60000 }}));
+  app.use(flash());
 
   var Vote = require('./app/models/vote');
   var newVote = new Vote;

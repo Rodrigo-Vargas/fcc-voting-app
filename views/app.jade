@@ -18,6 +18,11 @@ html
                 a(href="/pools") Pools
 
     #content.container
+      if message && message.length > 0
+        div(role="alert").alert.alert-success
+          strong Well done! 
+          span #{message}
+
       block content
 
     script(src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript")

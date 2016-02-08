@@ -9,8 +9,6 @@
 * Add slug generator on create pool form
 
 * Add message when no pools
-* When insert a new pool, redirect the user to pool list with a feedback message
-* When insert a new option, redirect the user to pool show page with a feedback message
 * Create pool show page
 * Create session system for login
 * Create a my pools page
@@ -18,6 +16,9 @@
 * Change port
 * Change mongodb url
 * See message 'Cannot find whatever of kerberos, appears in terminal'
+* Review 'secret' in cookie parser
+* Add remove question feature
+* Add remove option feature
 
 
 ## User Stories

@@ -6,7 +6,7 @@ function pools_controller (mongoose) {
 
   this.index = function (req, res) {
     Pool.find({}, function(err, pools) {
-      res.render('pools/index', { pools:pools });
+      res.render('pools/index', { pools:pools, message: req.flash('info') });
     });
   }
 
@@ -23,11 +23,15 @@ function pools_controller (mongoose) {
 
     pool.save(function(err, pool){
       if (err) {
-        throw err;
-        res.end('Erro ao cadastrar')
+        console.error(err);
+        req.flash('info', 'Error on insert pool. Try again later.');
       }
-
-      res.end('Cadastrado com sucesso')
+      else
+      {
+        req.flash('info', 'Pool inserted successfully');  
+      }
+      
+      res.redirect('/pools');
     });
   }
 
@@ -45,8 +49,10 @@ function pools_controller (mongoose) {
       .exec(function (err, options) {
         if (err) 
           return handleError(err);
+        
         res.render('pools/show', {  pool : pool,
-                                    options : options });
+                                    options : options,
+                                    message: req.flash('info') });
       });
     });
   }

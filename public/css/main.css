@@ -60,3 +60,7 @@ a,a:hover {
 #option-list li:hover {
   background-color: #ddd;
 }
+
+.alert span {
+  margin-left: 5px;
+}

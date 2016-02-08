@@ -15,16 +15,22 @@ function options_controller (mongoose) {
     var poolId = req.params.pool_id;
     var title = req.body.title;
     
-    Pool.findOne({_id : poolId}, function(err, pools){
+    Pool.findOne({_id : poolId}, function(err, pool){
       var option = new Option({ title: title,
                                 _pool : poolId,
                                 votes : 0});
 
       option.save(function (err, option) {
-        if (err) 
-          return console.error(err);
-
-        res.end('Option successfully created');
+        if (err) {
+          console.error(err);
+          req.flash('info', 'Error on insert option. Try again later.');
+        }
+        else
+        {
+          req.flash('info', 'Option inserted successfully');  
+        }
+        
+        res.redirect('/pool/' + pool.slug_title);
       });
     });
   }
