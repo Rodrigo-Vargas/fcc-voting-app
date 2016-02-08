@@ -2,11 +2,45 @@ extends ../app
 block content
   h1 #{ pool.title }
 
-  h2 Options
-  ul#option-list
-    each option in options
-      li.row
-        span.col-xs-4 #{option.title} [#{option.votes}]
-        a.col-xs-8(href="/pool/#{pool._id}/option/#{option._id}/vote") Vote
+  .row
+    .col-xs-6
+      h2 Options
+      ul#option-list
+        each option in options
+          li.row
+            span(data-votes="#{option.votes}" data-title="#{option.title}").option.col-xs-4 #{option.title} [#{option.votes}]
+            a.col-xs-8(href="/pool/#{pool._id}/option/#{option._id}/vote") Vote
+    .col-xs-6
+      #chart_div
 
   a(href="/pool/#{pool._id}/options/new", class="btn btn-default") New Option
+
+  script(type="text/javascript" src="https://www.google.com/jsapi")
+  script(type='text/javascript').
+    google.load('visualization', '1.0', {'packages':['corechart']});
+
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Option');
+      data.addColumn('number', 'Votes');
+
+      var rows = [];
+
+      $(".option").each(function(option){
+        var row = [];
+        row.push($(this).data("title"));
+        row.push($(this).data("votes"));
+        rows.push(row);
+      });
+
+      data.addRows(rows);
+
+      var options = {'title':'Result Chart',
+                     'width':400,
+                     'height':300};
+
+      var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }

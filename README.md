@@ -4,12 +4,9 @@
 
 * Implement User Stories
 
-* Implement vote system
-
 * Add validation on create option form
 * Add validation on create pool form
 * Add slug generator on create pool form
-* Add charts on show pool page
 
 * Add message when no pools
 * When insert a new pool, redirect the user to pool list with a feedback message
@@ -20,6 +17,7 @@
 * Create about page, showing the user stories and usefull information about the application
 * Change port
 * Change mongodb url
+* See message 'Cannot find whatever of kerberos, appears in terminal'
 
 
 ## User Stories
