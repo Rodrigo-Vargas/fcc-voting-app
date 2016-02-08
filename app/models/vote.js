@@ -4,10 +4,8 @@ var mongoose = require('mongoose')
 
 module.exports = function() {
   var schema = new Schema({
-    title: String,
-    _pool: { type: String, ref: 'Pool' },
-    votes: Number
+    _option: { type: String, ref: 'Option' }
   });
 
-  mongoose.model('Option', schema);
+  mongoose.model('Vote', schema);
 }

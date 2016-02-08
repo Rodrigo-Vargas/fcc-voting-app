@@ -4,10 +4,16 @@
 
 * Implement User Stories
 
-* Add question on a pool
+* Implement vote system
+
+* Add validation on create option form
+* Add validation on create pool form
+* Add slug generator on create pool form
+* Add charts on show pool page
 
 * Add message when no pools
 * When insert a new pool, redirect the user to pool list with a feedback message
+* When insert a new option, redirect the user to pool show page with a feedback message
 * Create pool show page
 * Create session system for login
 * Create a my pools page

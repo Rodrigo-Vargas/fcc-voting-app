@@ -3,8 +3,10 @@ block content
   h1 #{ pool.title }
 
   h2 Options
-  ul
+  ul#option-list
     each option in options
-      li #{option.title}
+      li.row
+        span.col-xs-4 #{option.title} [#{option.votes}]
+        a.col-xs-8(href="/pool/#{pool._id}/option/#{option._id}/vote") Vote
 
   a(href="/pool/#{pool._id}/options/new", class="btn btn-default") New Option

@@ -31,8 +31,6 @@ function pools_controller (mongoose) {
     });
   }
 
-  
-
   this.show = function(req, res){
     var slug_title = req.params.slug_title;
 
@@ -47,8 +45,8 @@ function pools_controller (mongoose) {
       .exec(function (err, options) {
         if (err) 
           return handleError(err);
-          res.render('pools/show', {  pool : pool,
-                                      options : options });
+        res.render('pools/show', {  pool : pool,
+                                    options : options });
       });
     });
   }

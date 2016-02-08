@@ -1,13 +1,10 @@
 extends ../app
 block content
-  form(action="/pool/#{poolId}/options/new", method="POST")
-    div.form-group
-      input(type="text", placeholder="Title", class="form-control" name="title")
+  #form-container
+    form(action="/pool/#{poolId}/options/new", method="POST")
+      div.form-group
+        <label>Title</label>
+        input(type="text", placeholder="Title", class="form-control" name="title")
 
-    div.form-group
-      select(name="pool")
-        each pool in pools
-          option(value="#{ pool._id }") #{ pool.title }
-    
-    div.form-group
-      input(type="submit", name="Submit", class="btn btn-default")
+      div.form-group
+        input(type="submit", name="Submit", class="btn btn-default")

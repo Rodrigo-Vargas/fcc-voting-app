@@ -3,6 +3,19 @@ html
   head
     title Rvg Voting App
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
+    link(rel="stylesheet" href="/public/css/main.css")
+    link(href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css')
   body
-    .container
+    #header
+      .container
+        .row
+          .col-xs-3
+            #logo
+              a(href="/pools") Rvg Voting App
+          #nav.col-xs-9
+            ul
+              li
+                a(href="/pools") Pools
+
+    #content.container
       block content

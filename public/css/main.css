@@ -4,3 +4,59 @@ body {
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
 }
+
+a,a:hover {
+  color: #fff;
+}
+
+#content a {
+  color: #000;
+}
+
+#header {
+  background-color: #564390;
+}
+
+#header span {
+  color: #fff;
+}
+
+#logo a {
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  color: #564390;
+  display: block;
+  margin: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+#logo a:hover {
+  text-decoration: none;
+}
+
+#nav li {
+  margin: 20px;
+  padding: 20px;
+  list-style: none;
+}
+
+#form-container {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 20px 0;
+  padding: 40px;
+}
+
+#option-list {
+  list-style: none;
+}
+
+#option-list li {
+  padding: 15px 0;
+}
+
+#option-list li:hover {
+  background-color: #ddd;
+}

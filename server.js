@@ -25,6 +25,9 @@ db.once('open', function() {
     extended: true
   }));
 
+  var Vote = require('./app/models/vote');
+  var newVote = new Vote;
+
   var Option = require('./app/models/option');
   var newOption = new Option;
 

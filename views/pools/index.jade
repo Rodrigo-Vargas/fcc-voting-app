@@ -1,15 +1,10 @@
-doctype html
-html
-  head
-    title Signin form
-    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
-  body
-    div.container
-      h1 Pools
+extends ../app
+block content
+  h1 Pools
 
-      ul
-        each pool in pools
-          li 
-            a(href="/pool/#{ pool.slug_title }") #{ pool.title }
+  ul
+    each pool in pools
+      li 
+        a(href="/pool/#{ pool.slug_title }") #{ pool.title }
 
-      a.btn.btn-default(href="/pools/new") "New Pool" 
+  a.btn.btn-default(href="/pools/new") New Pool 

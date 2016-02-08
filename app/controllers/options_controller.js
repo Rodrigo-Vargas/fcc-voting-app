@@ -12,19 +12,19 @@ function options_controller (mongoose) {
   }
 
   this.create = function (req, res){
-    //var poolId = req.params.pool_id;
+    var poolId = req.params.pool_id;
     var title = req.body.title;
-    var poolId = req.body.pool;
-
+    
     Pool.findOne({_id : poolId}, function(err, pools){
       var option = new Option({ title: title,
-                                _pool : poolId});
+                                _pool : poolId,
+                                votes : 0});
 
       option.save(function (err, option) {
         if (err) 
           return console.error(err);
 
-        res.end('Cadastrado com sucesso')
+        res.end('Option successfully created');
       });
     });
   }

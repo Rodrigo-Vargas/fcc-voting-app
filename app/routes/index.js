@@ -3,11 +3,13 @@
 var PoolsController = require(process.cwd() + '/app/controllers/pools_controller.js');
 var UsersController = require(process.cwd() + '/app/controllers/users_controller.js');
 var OptionsController = require(process.cwd() + '/app/controllers/options_controller.js');
+var VotesController = require(process.cwd() + '/app/controllers/votes_controller.js');
 
 module.exports = function (app, mongoose) {
   var poolsController = new PoolsController(mongoose);
   var users_controller = new UsersController(mongoose);
   var options_controller = new OptionsController(mongoose);
+  var votes_controller = new VotesController(mongoose);
 
   app.route('/')
     .get(function (req, res) {
@@ -33,6 +35,11 @@ module.exports = function (app, mongoose) {
 
   app.get('/pool/:slug_title', poolsController.show);
 
+  /* Options */
+
   app.get('/pool/:pool_id/options/new', options_controller.new)
   app.post('/pool/:pool_id/options/new', options_controller.create)
+
+  /* Votes */
+  app.get('/pool/:pool_id/option/:option_id/vote', votes_controller.vote);
 };
