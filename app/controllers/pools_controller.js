@@ -5,8 +5,11 @@ function pools_controller (mongoose) {
   var Option = mongoose.model('Option');
 
   this.index = function (req, res) {
+    
+    var user = req.user;
+    console.log(JSON.stringify(user));
     Pool.find({}, function(err, pools) {
-      res.render('pools/index', { pools:pools, message: req.flash('info') });
+      res.render('pools/index', { pools:pools, message: req.flash('info'), user : user });
     });
   }
 

@@ -1,0 +1,26 @@
+extends ../app
+block content
+
+  div.col-sm-6.col-sm-offset-3
+
+    h1
+      span.fafa-sign-in Signup
+
+    form(action="/signup" method="post")
+      div.form-group
+        label Email
+        input(type="text" class="form-control" name="email")
+
+      div.form-group
+        label Password
+        input(type="password" class="form-control" name="password")
+
+      button(type="submit" class="btn btn-warning btn-lg") Signup
+
+    hr
+
+    p Already have an account?
+      a(href="/login") Login
+
+    p Or go 
+      a(href="/") home

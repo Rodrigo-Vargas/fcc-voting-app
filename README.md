@@ -9,7 +9,6 @@
 * Add slug generator on create pool form
 
 * Add message when no pools
-* Create pool show page
 * Create session system for login
 * Create a my pools page
 * Create about page, showing the user stories and usefull information about the application
@@ -19,6 +18,7 @@
 * Review 'secret' in cookie parser
 * Add remove question feature
 * Add remove option feature
+* Analyze the change of view engine of jade to handlebars
 
 
 ## User Stories

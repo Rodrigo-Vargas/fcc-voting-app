@@ -42,6 +42,11 @@ a,a:hover {
   list-style: none;
 }
 
+#info-user span {
+  margin: 20px;
+  padding: 20px;
+}
+
 #form-container {
   border: 1px solid #ccc;
   border-radius: 5px;

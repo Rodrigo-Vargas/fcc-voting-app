@@ -12,10 +12,14 @@ html
           .col-xs-3
             #logo
               a(href="/pools") Rvg Voting App
-          #nav.col-xs-9
+          #nav.col-xs-7
             ul
               li
                 a(href="/pools") Pools
+
+          if (user)
+            #info-user.col-xs-2
+              span #{ user.local.email }
 
     #content.container
       if message && message.length > 0

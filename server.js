@@ -1,6 +1,7 @@
 'use strict';
 
 var express = require('express');
+var passport = require('passport');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var flash = require('connect-flash');
@@ -31,6 +32,10 @@ db.once('open', function() {
   app.use(session({cookie: { maxAge: 60000 }}));
   app.use(flash());
 
+  app.use(session({secret: 'minhaChaveSecreta'}));
+  app.use(passport.initialize());
+  app.use(passport.session());
+
   var Vote = require('./app/models/vote');
   var newVote = new Vote;
 
@@ -40,9 +45,11 @@ db.once('open', function() {
   var Pool = require('./app/models/pool');
   var newPool = new Pool;
 
-   routes(app, mongoose);
+  require('./config/passport')(passport);
 
-   app.listen(3000, function () {
-      console.log('Node.js listening on port 3000...');
-   });
+  routes(app, mongoose, passport);
+
+  app.listen(3000, function () {
+    console.log('Node.js listening on port 3000...');
+  });
 });
