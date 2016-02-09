@@ -5,11 +5,15 @@ function pools_controller (mongoose) {
   var Option = mongoose.model('Option');
 
   this.index = function (req, res) {
-    
     var user = req.user;
-    console.log(JSON.stringify(user));
     Pool.find({}, function(err, pools) {
       res.render('pools/index', { pools:pools, message: req.flash('info'), user : user });
+    });
+  }
+
+  this.my_pools = function (req, res){
+    Pool.find({ user : req.user }, function(err, pools) {
+      res.render('pools/index', { pools:pools, message: req.flash('info'), user : req.user });
     });
   }
 
@@ -18,11 +22,30 @@ function pools_controller (mongoose) {
   }
 
   this.create = function (req, res){
+    req.checkBody('title', 'Invalid title').notEmpty();
+    req.checkBody('slug_title', 'Invalid slug title').notEmpty();
+    
+    var errors = req.validationErrors();
+
+    if (errors)
+    {
+      var errorList = "";
+      errors.forEach(function(error){
+        errorList += error.msg + ", "
+      });
+
+      req.flash('info', errorList);
+
+      res.render('pools/new', { message : req.flash('info')});
+      return;
+    }
+
     var title = req.body.title;
     var slugTitle = req.body.slug_title;
 
     var pool = new Pool({ title : title,
-                          slug_title : slugTitle });
+                          slug_title : slugTitle,
+                          user :  req.user });
 
     pool.save(function(err, pool){
       if (err) {
@@ -31,7 +54,7 @@ function pools_controller (mongoose) {
       }
       else
       {
-        req.flash('info', 'Pool inserted successfully');  
+        req.flash('info', 'Pool inserted successfully');
       }
       
       res.redirect('/pools');
@@ -43,7 +66,7 @@ function pools_controller (mongoose) {
 
     var queryObject = {"slug_title" : slug_title};
 
-    Pool.findOne(queryObject, 'title slug_title', function (err, pool) {
+    Pool.findOne(queryObject, {}, function (err, pool) {
       if (err) 
         throw err;
 
@@ -57,6 +80,22 @@ function pools_controller (mongoose) {
                                     options : options,
                                     message: req.flash('info') });
       });
+    });
+  }
+
+  this.destroy = function (req, res){
+
+    Pool.remove({ _id: req.params.id }, function(err){
+      if (err) {
+        console.error(err);
+        req.flash('info', 'Error on delete pool. Try again later.');
+      }
+      else
+      {
+        req.flash('info', 'Pool deleted successfully');  
+      }
+      
+      res.redirect('/pools');
     });
   }
 }

@@ -27,10 +27,11 @@ module.exports = function (app, mongoose, passport) {
   /* Pools */
 
   app.get('/pools', isAuthenticated, poolsController.index);
+  app.get('/mypools', isAuthenticated, poolsController.my_pools)
 
   app.get('/pools/new', poolsController.new)
-  app.post('/pools/new', poolsController.create);
-
+  app.post('/pools/new', isAuthenticated, poolsController.create);
+  app.get('/pool/:id/delete', poolsController.destroy);
   app.get('/pool/:slug_title', poolsController.show);
 
   /* Options */

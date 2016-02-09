@@ -30,6 +30,7 @@
     "cookie-parser": "^1.4.1",
     "express": "^4.13.3",
     "express-session": "^1.13.0",
+    "express-validator": "^2.19.1",
     "jade": "^1.11.0",
     "mongodb": "^2.0.42",
     "mongoose": "^4.4.2",

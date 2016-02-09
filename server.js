@@ -1,6 +1,7 @@
 'use strict';
 
 var express = require('express');
+var expressValidator = require('express-validator');
 var passport = require('passport');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
@@ -12,7 +13,8 @@ var mongoose = require('mongoose');
 
 var app = express();
 
-var mongoUrl = "mongodb://localhost:27017/clementinejs";
+var mongoUrl = process.env.MONGOLAB_URI || "mongodb://localhost:27017/rvg-voting-app";
+var port = process.env.PORT || 3000;
 
 mongoose.connect(mongoUrl);
 
@@ -27,6 +29,22 @@ db.once('open', function() {
   app.use( bodyParser.json() );       // to support JSON-encoded bodies
   app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
+  }));
+  app.use(expressValidator({
+    errorFormatter: function(param, msg, value) {
+        var namespace = param.split('.')
+        , root    = namespace.shift()
+        , formParam = root;
+
+      while(namespace.length) {
+        formParam += '[' + namespace.shift() + ']';
+      }
+      return {
+        param : formParam,
+        msg   : msg,
+        value : value
+      };
+    }
   }));
   app.use(cookieParser('secret'));
   app.use(session({cookie: { maxAge: 60000 }}));
@@ -49,7 +67,7 @@ db.once('open', function() {
 
   routes(app, mongoose, passport);
 
-  app.listen(3000, function () {
-    console.log('Node.js listening on port 3000...');
+  app.listen(port , function () {
+    console.log('Node.js listening on port '+ port + '...');
   });
 });

@@ -4,21 +4,16 @@
 
 * Implement User Stories
 
-* Add validation on create option form
-* Add validation on create pool form
 * Add slug generator on create pool form
 
 * Add message when no pools
-* Create session system for login
-* Create a my pools page
 * Create about page, showing the user stories and usefull information about the application
-* Change port
-* Change mongodb url
 * See message 'Cannot find whatever of kerberos, appears in terminal'
 * Review 'secret' in cookie parser
-* Add remove question feature
 * Add remove option feature
 * Analyze the change of view engine of jade to handlebars
+* Review message deprecated messages on console
+* Block user delete a pool that not belongs to him
 
 
 ## User Stories

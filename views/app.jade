@@ -16,6 +16,8 @@ html
             ul
               li
                 a(href="/pools") Pools
+              li
+                a(href="/mypools") My Pools
 
           if (user)
             #info-user.col-xs-2
@@ -23,8 +25,7 @@ html
 
     #content.container
       if message && message.length > 0
-        div(role="alert").alert.alert-success
-          strong Well done! 
+        div(role="alert").alert.alert-info
           span #{message}
 
       block content

@@ -13,7 +13,12 @@ block content
     .col-xs-6
       #chart_div
 
-  a(href="/pool/#{pool._id}/options/new", class="btn btn-default") New Option
+  .row
+    .col-xs-3
+      a(href="/pool/#{pool._id}/options/new", class="btn btn-default") New Option
+
+    .col-xs-6
+      a(href="/pool/#{pool._id}/delete" class="btn btn-danger") Remove Pool
 
   script(type="text/javascript" src="https://www.google.com/jsapi")
   script(type='text/javascript').

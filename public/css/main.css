@@ -37,12 +37,14 @@ a,a:hover {
 }
 
 #nav li {
+  display: inline-block;
   margin: 20px;
   padding: 20px;
   list-style: none;
 }
 
 #info-user span {
+  display: block;
   margin: 20px;
   padding: 20px;
 }

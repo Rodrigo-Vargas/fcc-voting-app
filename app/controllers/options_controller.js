@@ -12,6 +12,27 @@ function options_controller (mongoose) {
   }
 
   this.create = function (req, res){
+    /* Validation */
+    req.checkBody('title', 'Invalid title').notEmpty();
+    req.checkParams('pool_id', 'Invalid slug title').notEmpty();
+
+    var errors = req.validationErrors();
+
+    if (errors)
+    {
+      var errorList = "";
+      errors.forEach(function(error){
+        errorList += error.msg + ", "
+      });
+
+      req.flash('info', errorList);
+
+      res.render('options/new', { message : req.flash('info')});
+      return;
+    }
+
+    /* ---- Validation ----- */
+
     var poolId = req.params.pool_id;
     var title = req.body.title;
     
