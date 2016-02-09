@@ -17,8 +17,9 @@ block content
     .col-xs-3
       a(href="/pool/#{pool._id}/options/new", class="btn btn-default") New Option
 
-    .col-xs-6
-      a(href="/pool/#{pool._id}/delete" class="btn btn-danger") Remove Pool
+    if own_pool
+      .col-xs-6
+        a(href="/pool/#{pool._id}/delete" class="btn btn-danger") Remove Pool
 
   script(type="text/javascript" src="https://www.google.com/jsapi")
   script(type='text/javascript').

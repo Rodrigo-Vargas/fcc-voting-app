@@ -11,33 +11,28 @@ module.exports = function (app, mongoose, passport) {
   var options_controller = new OptionsController(mongoose);
   var votes_controller = new VotesController(mongoose);
 
-  // Assim como qualquer middleware, é quintessencial chamarmos next()
-  // Se o usuário estiver autenticado
   var isAuthenticated = function (req, res, next) {
     if (req.isAuthenticated())
-      return next();
-    res.redirect('/');
+      return next(); 
+    res.redirect('/login');
   }
 
-  app.route('/')
-    .get(function (req, res) {
-        res.sendFile(process.cwd() + '/public/index.html');
-    });
+  app.get('/', isAuthenticated, poolsController.index);
 
   /* Pools */
 
-  app.get('/pools', isAuthenticated, poolsController.index);
+  app.get('/pools', poolsController.index);
   app.get('/mypools', isAuthenticated, poolsController.my_pools)
 
   app.get('/pools/new', poolsController.new)
   app.post('/pools/new', isAuthenticated, poolsController.create);
-  app.get('/pool/:id/delete', poolsController.destroy);
+  app.get('/pool/:id/delete', isAuthenticated, poolsController.destroy);
   app.get('/pool/:slug_title', poolsController.show);
 
   /* Options */
 
-  app.get('/pool/:pool_id/options/new', options_controller.new)
-  app.post('/pool/:pool_id/options/new', options_controller.create)
+  app.get('/pool/:pool_id/options/new', isAuthenticated, options_controller.new)
+  app.post('/pool/:pool_id/options/new', isAuthenticated, options_controller.create)
 
   /* Votes */
   app.get('/pool/:pool_id/option/:option_id/vote', votes_controller.vote);
@@ -56,7 +51,7 @@ module.exports = function (app, mongoose, passport) {
  
   /* Requisição POST para LOGIN */
   app.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/pools',
+    successRedirect: '/',
     failureRedirect: '/login',
     failureFlash : true
   }));
@@ -68,7 +63,7 @@ module.exports = function (app, mongoose, passport) {
  
   /* Requisição POST para Registros */
   app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/pools',
+    successRedirect: '/',
     failureRedirect: '/signup',
     failureFlash : true
   }));

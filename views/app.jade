@@ -19,10 +19,11 @@ html
                 a(href="/pools") Pools
               li
                 a(href="/mypools") My Pools
-
-          if (user)
-            #info-user.col-xs-2
-              span #{ user.local.email }
+          #info-user.col-xs-2
+            if (user)
+              a(href="my-pools") #{ user.local.email }
+            else
+              a(href="/login") Login
 
     #content.container
       if message && message.length > 0

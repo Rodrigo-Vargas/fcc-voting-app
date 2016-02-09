@@ -43,7 +43,7 @@ a,a:hover {
   list-style: none;
 }
 
-#info-user span {
+#info-user a {
   display: block;
   margin: 20px;
   padding: 20px;

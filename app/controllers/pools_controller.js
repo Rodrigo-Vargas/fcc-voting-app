@@ -70,6 +70,11 @@ function pools_controller (mongoose) {
       if (err) 
         throw err;
 
+      var ownPool = false;
+
+      if (req.user && req.user._id.toString() == pool.user.toString())
+        ownPool = true;
+      
       Option
       .find({ _pool: pool._id })
       .exec(function (err, options) {
@@ -78,24 +83,30 @@ function pools_controller (mongoose) {
         
         res.render('pools/show', {  pool : pool,
                                     options : options,
-                                    message: req.flash('info') });
+                                    message: req.flash('info'),
+                                    user: req.user,
+                                    own_pool : ownPool });
       });
     });
   }
 
   this.destroy = function (req, res){
 
-    Pool.remove({ _id: req.params.id }, function(err){
+    Pool.remove({ _id: req.params.id, user : req.user._id }, function(err, pool){
       if (err) {
         console.error(err);
         req.flash('info', 'Error on delete pool. Try again later.');
       }
-      else
-      {
-        req.flash('info', 'Pool deleted successfully');  
-      }
-      
-      res.redirect('/pools');
+
+      Pool.findById(pool._id, function (err, pool) {
+        if (pool)
+          req.flash('info', 'Pool deleted successfully');  
+        else
+          req.flash('info', 'Pool not deleted');  
+
+
+        res.redirect('/pools');
+      });
     });
   }
 }

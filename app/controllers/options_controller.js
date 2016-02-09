@@ -7,7 +7,8 @@ function options_controller (mongoose) {
   this.new = function(req, res){
     Pool.find({}, function(err, pools){
       res.render('options/new', { pools : pools, 
-                                  poolId : req.params.pool_id });
+                                  poolId : req.params.pool_id,
+                                  user : req.user });
     });
   }
 
