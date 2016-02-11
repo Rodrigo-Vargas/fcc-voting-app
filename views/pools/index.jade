@@ -11,4 +11,5 @@ block content
     div.alert.alert-info
       span No pools to show
 
-  a.btn.btn-default(href="/pools/new") New Pool 
+  if (user)
+    a.btn.btn-default(href="/pools/new") New Pool 

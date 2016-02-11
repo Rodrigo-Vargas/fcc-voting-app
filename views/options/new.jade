@@ -4,7 +4,7 @@ block content
     form(action="/pool/#{poolId}/options/new", method="POST")
       div.form-group
         <label>Title</label>
-        input(type="text", placeholder="Title", class="form-control" name="title")
+        input(type="text", placeholder="Title", class="form-control" name="title" required)
 
       div.form-group
         input(type="submit", name="Submit", class="btn btn-default")

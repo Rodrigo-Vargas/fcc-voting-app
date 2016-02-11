@@ -19,14 +19,14 @@ module.exports = function (app, mongoose, passport) {
     res.redirect('/login');
   }
 
-  app.get('/', isAuthenticated, poolsController.index);
+  app.get('/', poolsController.index);
 
   /* Pools */
 
   app.get('/pools', poolsController.index);
   app.get('/mypools', isAuthenticated, poolsController.my_pools)
 
-  app.get('/pools/new', poolsController.new)
+  app.get('/pools/new', isAuthenticated, poolsController.new)
   app.post('/pools/new', isAuthenticated, poolsController.create);
   app.get('/pool/:id/delete', isAuthenticated, poolsController.destroy);
   app.get('/pool/:slug_title', poolsController.show);

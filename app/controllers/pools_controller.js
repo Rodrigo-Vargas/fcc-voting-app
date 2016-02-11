@@ -7,7 +7,9 @@ function pools_controller (mongoose) {
   this.index = function (req, res) {
     var user = req.user;
     Pool.find({}, function(err, pools) {
-      res.render('pools/index', { pools:pools, message: req.flash('info'), user : user });
+      res.render('pools/index', { pools:pools, 
+                                  message: req.flash('info'), 
+                                  user : user });
     });
   }
 
