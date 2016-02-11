@@ -2,8 +2,6 @@
 
 ## TODO
 
-* Implement User Stories
-
 * See message 'Cannot find whatever of kerberos, appears in terminal'. Need update mongoose and mongodb to fix
 * New Option only can appear for the authenticated users
 
@@ -16,7 +14,7 @@
 
 * [IMPLEMENTED]User Story: As an authenticated user, I can share my polls with my friends.
 
-* [NOT]User Story: As an authenticated user, I can see the aggregate results of my polls.
+* [IMPLEMENTED]User Story: As an authenticated user, I can see the aggregate results of my polls.
 
 * [IMPLEMENTED]User Story: As an authenticated user, I can delete polls that I decide I don't want anymore.
 

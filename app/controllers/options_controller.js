@@ -12,6 +12,12 @@ function options_controller (mongoose) {
     });
   }
 
+  this.show = function (req, res){
+    Option.find({ _pool  : req.params.pool_id }, function(err, options) {
+      res.json(options);
+    });
+  }
+
   this.create = function (req, res){
     /* Validation */
     req.checkBody('title', 'Invalid title').notEmpty();

@@ -32,8 +32,8 @@ module.exports = function (app, mongoose, passport) {
   app.get('/pool/:slug_title', poolsController.show);
 
   /* Options */
-
-  app.get('/pool/:pool_id/options/new', isAuthenticated, optionsController.new)
+  app.get('/pool/:pool_id/options', isAuthenticated, optionsController.show);
+  app.get('/pool/:pool_id/options/new', isAuthenticated, optionsController.new);
   app.post('/pool/:pool_id/options/new', isAuthenticated, optionsController.create)
 
   /* Votes */

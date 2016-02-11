@@ -7,16 +7,26 @@ block content
       each pool in pools
         li 
           a.pool(href="/pool/#{ pool.slug_title }" data-id="#{ pool._id }") #{ pool.title }
+          div(id="#{ pool.id }")
   else
     div.alert.alert-info
       span No pools to show
 
   a.btn.btn-default(href="/pools/new") New Pool 
 
-  script(type="text/javascript")
+  script(type="text/javascript").
     $(document).ready(function(){
       $(".pool").each(function(pool){
-        var id = $(this).data("")
+        var id = $(this).data("id");
 
+        $.ajax({
+          url: "/pool/" + id + "/options"
+        })
+        .done(function( options ) {
+          options.forEach(function(option){
+            console.log(option);
+            $("#" + option._pool).append(option.title + " - Votes:" + option.votes + "<br>");
+          });
+        });
       });
     });
