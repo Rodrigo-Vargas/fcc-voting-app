@@ -6,6 +6,7 @@ module.exports = function() {
   var schema = new Schema({
     title: String,
     _pool: { type: String, ref: 'Pool' },
+    _user: { type: String, ref: 'User' },
     votes: Number
   });
 

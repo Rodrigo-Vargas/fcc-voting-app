@@ -5,7 +5,6 @@
 * See message 'Cannot find whatever of kerberos, appears in terminal'. Need update mongoose and mongodb to fix
 * New Option only can appear for the authenticated users
 
-* Add feature of option deletion
 * Block user vote twice on same pool 
 * Add client side validation on forms
 

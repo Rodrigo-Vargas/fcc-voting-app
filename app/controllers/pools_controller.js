@@ -102,7 +102,6 @@ function pools_controller (mongoose) {
   }
 
   this.destroy = function (req, res){
-
     Pool.remove({ _id: req.params.id, user : req.user._id }, function(err, pool){
       if (err) {
         console.error(err);
@@ -111,9 +110,9 @@ function pools_controller (mongoose) {
 
       Pool.findById(pool._id, function (err, pool) {
         if (pool)
-          req.flash('info', 'Pool deleted successfully');  
-        else
           req.flash('info', 'Pool not deleted');  
+        else
+          req.flash('info', 'Pool deleted successfully');  
 
 
         res.redirect('/pools');

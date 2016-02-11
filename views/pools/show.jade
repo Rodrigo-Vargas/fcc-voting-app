@@ -19,7 +19,8 @@ block content
               each option in options
                 li.row
                   span(data-votes="#{option.votes}" data-title="#{option.title}").option.col-xs-4 #{option.title} [#{option.votes}]
-                  a.col-xs-8(href="/pool/#{pool._id}/option/#{option._id}/vote") Vote
+                  a.col-xs-3(href="/pool/#{pool._id}/option/#{option._id}/vote") Vote
+                  a.col-xs-5(href="/pool/#{pool._id}/option/#{option._id}/destroy") Remove
           div(role="tabpanel" class="tab-pane" id="results")
             #chart_div
 

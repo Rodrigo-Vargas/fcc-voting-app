@@ -1,17 +1,14 @@
 {
-  "name": "clementinejs",
-  "version": "1.0.2",
-  "description": "A light-weight MEAN stack boilerplate.",
+  "name": "rvg-voting-app",
+  "version": "1.0.0",
+  "description": "A voting app builded with node and express.",
   "main": "server.js",
-  "scripts": {
-    "start": "gulp"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/johnstonbl01/clementinejs"
+    "url": "git+https://github.com/Rodrigo-Vargas/fcc-voting-app"
   },
-  "homepage": "http://johnstonbl01.github.io/clementinejs/",
-  "bugs": "https://github.com/johnstonbl01/clementinejs/issues",
+  "homepage": "http://rodrigovg.com.br",
+  "bugs": "https://github.com/Rodrigo-Vargas/fcc-voting-app/issues",
   "keywords": [
     "MEAN",
     "MongoDB",
@@ -19,9 +16,10 @@
     "Angular",
     "Node",
     "javascript",
-    "boilerplate"
+    "boilerplate",
+    "voting"
   ],
-  "author": "Blake Johnston",
+  "author": "Rodrigo Vargas",
   "license": "MIT",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",

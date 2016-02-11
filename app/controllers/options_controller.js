@@ -3,6 +3,7 @@
 function options_controller (mongoose) {
   var Pool = mongoose.model('Pool');
   var Option = mongoose.model('Option');
+  var Vote = mongoose.model('Vote');
 
   this.new = function(req, res){
     Pool.find({}, function(err, pools){
@@ -46,6 +47,7 @@ function options_controller (mongoose) {
     Pool.findOne({_id : poolId}, function(err, pool){
       var option = new Option({ title: title,
                                 _pool : poolId,
+                                _user : pool.user,
                                 votes : 0});
 
       option.save(function (err, option) {
@@ -59,6 +61,27 @@ function options_controller (mongoose) {
         }
         
         res.redirect('/pool/' + pool.slug_title);
+      });
+    });
+  }
+
+  this.destroy = function (req, res){
+
+    Option.remove({ _id: req.params.id, _user: req.user._id.toString() }, function(err, option){
+      if (err) {
+        console.error(err);
+        req.flash('info', 'Error on delete option. Try again later.');
+      }
+
+      Option.findById(option._id, function (err, option) {
+        if (option)
+          req.flash('info', 'Option not deleted');
+        else
+          req.flash('info', 'Option deleted successfully');
+
+        Vote.remove({ _option: req.params.id }, function(err, vote){
+          res.redirect('/pools');
+        });
       });
     });
   }
