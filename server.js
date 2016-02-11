@@ -46,10 +46,13 @@ db.once('open', function() {
       };
     }
   }));
-  app.use(cookieParser('secret'));
+
+  var secret = process.env.SECRET || "secret";
+
+  app.use(cookieParser(secret));
   app.use(flash());
 
-  app.use(session({secret: 'minhaChaveSecreta'}));
+  app.use(session({secret: secret}));
   app.use(passport.initialize());
   app.use(passport.session());
 

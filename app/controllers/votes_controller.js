@@ -14,10 +14,20 @@ function votes_controller (mongoose) {
         return console.error(err);
 
       Option.findOne({_id : optionId}, function(err, option){
+
+
         option.votes = option.votes + 1;
 
         option.save(function (err, option){
-          res.end('Your vote has computed');
+          if (err) {
+          console.error(err);
+          req.flash('info', 'Error on insert vote. Try again later.');
+          }
+          else
+          {
+            req.flash('info', 'Your vote has computed');
+          }
+          res.redirect('/pools');
         });  
       });
     });

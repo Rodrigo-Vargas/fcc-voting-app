@@ -71,3 +71,34 @@ a,a:hover {
 .alert span {
   margin-left: 5px;
 }
+
+.share-pool i {
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  font-size: 18px;
+  margin: 0 10px;
+}
+
+.share-pool i.fa-facebook {
+  padding: 7px 12px; 
+}
+
+.share-pool i.fa-facebook:hover {
+  color: #43609C;  
+}
+
+.share-pool i.fa-twitter {  
+  padding: 8px 10px; 
+}
+
+.share-pool i.fa-twitter:hover {
+  color: #1b95e0;
+}
+
+.share-pool i.fa-google-plus {
+  padding: 8px
+}
+
+.share-pool i.fa-google-plus:hover {
+  color: red;
+}

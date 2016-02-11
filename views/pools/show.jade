@@ -4,14 +4,35 @@ block content
 
   .row
     .col-xs-6
-      h2 Options
-      ul#option-list
-        each option in options
-          li.row
-            span(data-votes="#{option.votes}" data-title="#{option.title}").option.col-xs-4 #{option.title} [#{option.votes}]
-            a.col-xs-8(href="/pool/#{pool._id}/option/#{option._id}/vote") Vote
+
+      div
+        ul(class="nav nav-tabs" role="tablist")
+          li(role="presentation" class="active")
+            a(href="#options" aria-controls="options" role="tab" data-toggle="tab") Options
+          
+          li(role="presentation")
+            a(href="#results" aria-controls="results" role="tab" data-toggle="tab") Results
+        div(class="tab-content")
+          div(role="tabpanel" class="tab-pane active" id="options")
+            h2 Options
+            ul#option-list
+              each option in options
+                li.row
+                  span(data-votes="#{option.votes}" data-title="#{option.title}").option.col-xs-4 #{option.title} [#{option.votes}]
+                  a.col-xs-8(href="/pool/#{pool._id}/option/#{option._id}/vote") Vote
+          div(role="tabpanel" class="tab-pane" id="results")
+            #chart_div
+
+      
     .col-xs-6
-      #chart_div
+      h2 Share
+      div.share-pool
+        a(href="#{facebook_link}" target="_blank")
+          i.fa.fa-facebook
+        a(href="#{twitter_link}" target="_blank")
+          i.fa.fa-twitter
+        a(href="#{google_plus_link}")
+          i.fa.fa-google-plus
 
   .row
     .col-xs-3

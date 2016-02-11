@@ -13,7 +13,9 @@ function pools_controller (mongoose) {
 
   this.my_pools = function (req, res){
     Pool.find({ user : req.user }, function(err, pools) {
-      res.render('pools/index', { pools:pools, message: req.flash('info'), user : req.user });
+      res.render('pools/my', {  pools:pools, 
+                                message: req.flash('info'), 
+                                user : req.user });
     });
   }
 
@@ -80,12 +82,21 @@ function pools_controller (mongoose) {
       .exec(function (err, options) {
         if (err) 
           return handleError(err);
+
+        var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+
+        var facebookLink = "https://www.facebook.com/sharer/sharer.php?u=" + fullUrl;
+        var twitterLink = "https://twitter.com/intent/tweet?&hashtags=voteplex&url=" + fullUrl;
+        var googlePlusLink = "https://plus.google.com/share?url=" + fullUrl;
         
         res.render('pools/show', {  pool : pool,
                                     options : options,
                                     message: req.flash('info'),
                                     user: req.user,
-                                    own_pool : ownPool });
+                                    own_pool : ownPool,
+                                    facebook_link : facebookLink,
+                                    twitter_link : twitterLink,
+                                    google_plus_link : googlePlusLink });
       });
     });
   }

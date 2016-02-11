@@ -4,12 +4,14 @@ var PoolsController = require(process.cwd() + '/app/controllers/pools_controller
 var UsersController = require(process.cwd() + '/app/controllers/users_controller.js');
 var OptionsController = require(process.cwd() + '/app/controllers/options_controller.js');
 var VotesController = require(process.cwd() + '/app/controllers/votes_controller.js');
+var PagesController = require(process.cwd() + '/app/controllers/pages_controller.js');
 
 module.exports = function (app, mongoose, passport) {
   var poolsController = new PoolsController(mongoose);
-  var users_controller = new UsersController(mongoose);
-  var options_controller = new OptionsController(mongoose);
-  var votes_controller = new VotesController(mongoose);
+  var usersController = new UsersController(mongoose);
+  var optionsController = new OptionsController(mongoose);
+  var votesController = new VotesController(mongoose);
+  var pagesController = new PagesController(mongoose);
 
   var isAuthenticated = function (req, res, next) {
     if (req.isAuthenticated())
@@ -31,46 +33,31 @@ module.exports = function (app, mongoose, passport) {
 
   /* Options */
 
-  app.get('/pool/:pool_id/options/new', isAuthenticated, options_controller.new)
-  app.post('/pool/:pool_id/options/new', isAuthenticated, options_controller.create)
+  app.get('/pool/:pool_id/options/new', isAuthenticated, optionsController.new)
+  app.post('/pool/:pool_id/options/new', isAuthenticated, optionsController.create)
 
   /* Votes */
-  app.get('/pool/:pool_id/option/:option_id/vote', votes_controller.vote);
+  app.get('/pool/:pool_id/option/:option_id/vote', votesController.vote);
 
-/* Requisição GET para página de LOGIN. */
-  app.get('/', function(req, res) {
-    // Mostra a página de Login com qualquer mensagem flash, caso exista
-    res.render('index', { message: req.flash('message') });
-  });
+  /* Login */
 
-  /* Requisição GET para página de LOGIN. */
-  app.get('/login', function(req, res) {
-    // Mostra a página de Login com qualquer mensagem flash, caso exista
-    res.render('users/login', { message: req.flash('message') });
-  });
+  app.get('/login', usersController.login);
  
-  /* Requisição POST para LOGIN */
   app.post('/login', passport.authenticate('local-login', {
     successRedirect: '/',
     failureRedirect: '/login',
     failureFlash : true
   }));
  
-  /*Requisição GET para página de Registro */
-  app.get('/signup', function(req, res){
-    res.render('users/register',{message: req.flash('message')});
-  });
+  app.get('/signup', usersController.signup);
  
-  /* Requisição POST para Registros */
   app.post('/signup', passport.authenticate('local-signup', {
     successRedirect: '/',
     failureRedirect: '/signup',
     failureFlash : true
   }));
 
-  /* Manipula a saída */
-  app.get('/signout', function(req, res) {
-    req.logout();
-    res.redirect('/');
-  });
+  app.get('/signout', usersController.signout);
+
+  app.get('/about', pagesController.about);
 };
